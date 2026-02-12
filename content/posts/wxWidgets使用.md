@@ -34,7 +34,17 @@ mingw32-make -f makefile.gcc SHARED=0 UNICODE=1 BUILD=debug -j8
 * SHARED=0：编译静态库（SHARED=1 为动态库）
 * UNICODE=1：启用 Unicode 支持（必须与应用程序一致）
 * BUILD=release：发布版（debug 为调试版）
-* -j8：使用 8 个线程并行编译，加快速度 
+* -j8：使用 8 个线程并行编译，加快速度
+
+### 编译输出位置
+| 编译器 | 静态库输出目录 | 动态库输出目录 | 配置子目录示例 |
+|--------|----------------|----------------|----------------|
+| **MSVC** | `wxWidgets\lib\vc_lib` | `wxWidgets\lib\vc_dll` | `vc_lib\mswu`（Release Unicode）<br>`vc_lib\mswud`（Debug Unicode） |
+| **GCC (MinGW)** | `wxWidgets\lib\gcc_lib` | `wxWidgets\lib\gcc_dll` | `gcc_lib\mswu`（Release Unicode）<br>`gcc_lib\mswud`（Debug Unicode） |
+
+MSVC 编译的库不能与 GCC 编译的应用程序链接，反之亦然（ABI 不兼容）。
+> ✅ **关键规律**：`vc_*` 对应 MSVC，`gcc_*` 对应 MinGW；`_lib` 为静态库，`_dll` 为动态库。
+
 
 ## VS中关联操作
 在**属性管理器**窗口添加**wxWidgets**目录下的wxwidgets.props文件  
