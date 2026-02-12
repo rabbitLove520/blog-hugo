@@ -17,13 +17,26 @@ date: 2022-08-15 09:30:00
 
 ![upload successful](/images/wxWidgets_home.png)
 
+### 编译VC版本
 打开`Developer Command Prompt for VS 2022`工具，进入 `build\msw` 目录，编译
 ```
  nmake /f makefile.vc BUILD=debug SHARED=0 TARGET_CPU=X64
 ```
 这里我编译了64位debug版的静态库，这里`x64`和`debug`两个关键字很重要，你在VS中开发时，也要选择相应的配置  
 ![tip](https://user-images.githubusercontent.com/16663435/175751439-7e86aa58-4ba4-4b8f-8082-25fb3a7d0070.png "tip")  
+### 编译gcc的版本
+如果你的编译工具链是MinGW-w64，那也是一样进入 `build\msw` 目录，编译
+```
+mingw32-make -f makefile.gcc SHARED=0 UNICODE=1 BUILD=debug -j8
+```
 
+参数说明：
+* SHARED=0：编译静态库（SHARED=1 为动态库）
+* UNICODE=1：启用 Unicode 支持（必须与应用程序一致）
+* BUILD=release：发布版（debug 为调试版）
+* -j8：使用 8 个线程并行编译，加快速度 
+
+## VS中关联操作
 在**属性管理器**窗口添加**wxWidgets**目录下的wxwidgets.props文件  
 ![tip](https://user-images.githubusercontent.com/16663435/175751577-a88e9bbb-c3a2-4321-a93b-3c2ae26be0b6.png "tip")  
 这里我们还需要额外注意一下，因为我们跑的是GUI程序，所以需要在项目的**属性**中，把项目设置成`窗口`
