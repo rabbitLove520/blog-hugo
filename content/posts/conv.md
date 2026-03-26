@@ -63,3 +63,7 @@ print("卷积核参数维度：", conv.weight.shape)  # torch.Size([6, 3, 3, 3])
 1. `in_channels` 是**输入的通道数**（RGB图=3，灰度图=1），决定了每个卷积核的通道数；
 2. `out_channels` 是**卷积核的数量**，每个卷积核生成1个输出通道，最终输出通道数等于卷积核数量；
 3. 核心误区纠正：不是“每个输入通道做几次卷积”，而是“多个卷积核（数量=out_channels）分别对所有输入通道做卷积，每个卷积核输出1个通道”。
+
+
+参考：
+* [3Blue1 什么是卷积](https://www.bilibili.com/video/BV1Vd4y1e7pj/?share_source=copy_web&vd_source=3ec2710770c360c918910240c7bcc2c1)
